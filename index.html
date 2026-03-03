@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리더십 유형 테스트</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>리더십 유형 테스트</h1>
+        <form id="leadership-test">
+            <div class="question">
+                <p>1. 팀원들과의 소통을 중요시 여긴다.</p>
+                <label><input type="radio" name="q1" value="A"> 매우 그렇다</label>
+                <label><input type="radio" name="q1" value="B"> 그렇다</label>
+                <label><input type="radio" name="q1" value="C"> 보통이다</label>
+                <label><input type="radio" name="q1" value="D"> 그렇지 않다</label>
+            </div>
+            <div class="question">
+                <p>2. 결정을 내릴 때 팀원들의 의견을 반영한다.</p>
+                <label><input type="radio" name="q2" value="A"> 매우 그렇다</label>
+                <label><input type="radio" name="q2" value="B"> 그렇다</label>
+                <label><input type="radio" name="q2" value="C"> 보통이다</label>
+                <label><input type="radio" name="q2" value="D"> 그렇지 않다</label>
+            </div>
+            <!-- 추가 질문을 여기에 추가 -->
+            <button type="submit">테스트 결과 보기</button>
+        </form>
+        <div id="result" class="hidden">
+            <h2>테스트 결과</h2>
+            <p id="result-text"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
