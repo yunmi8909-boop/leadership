@@ -49,63 +49,54 @@ options:[
 ]}
 ];
 
-let currentQuestion=0;
-let scores={vision:0,execution:0,innovation:0,coordination:0,growth:0};
+let currentQuestion = 0;
+let scores = {vision:0,execution:0,innovation:0,coordination:0,growth:0};
 
 function showQuestion(){
-const question=questions[currentQuestion];
-document.getElementById("questionCategory").textContent=question.category;
+const q=questions[currentQuestion];
+document.getElementById("questionCategory").textContent=q.category;
 document.getElementById("questionText").textContent="";
 const container=document.getElementById("optionsContainer");
 container.innerHTML="";
 
-question.options.forEach((option,index)=>{
+q.options.forEach((opt,i)=>{
 const div=document.createElement("div");
 div.className="option";
 div.innerHTML=`
-<input type="radio" name="q${currentQuestion}" value="${option.type}" id="option${currentQuestion}_${index}">
-<label for="option${currentQuestion}_${index}">${option.text}</label>
+<input type="radio" name="q${currentQuestion}" value="${opt.type}" id="opt${i}">
+<label for="opt${i}">${opt.text}</label>
 `;
 container.appendChild(div);
 });
 
 document.getElementById("nextBtn").disabled=true;
 
-document.querySelectorAll(`input[name="q${currentQuestion}"]`).forEach(input=>{
+document.querySelectorAll(`input[name="q${currentQuestion}"]`)
+.forEach(input=>{
 input.addEventListener("change",()=>{
 document.getElementById("nextBtn").disabled=false;
 });
 });
 
-updateNavigation();
 updateProgressBar();
+updateNavigation();
 }
 
 function nextQuestion(){
 const selected=document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-if(!selected) return;
-
+if(!selected)return;
 scores[selected.value]++;
 currentQuestion++;
-
-if(currentQuestion<questions.length){
-showQuestion();
-}else{
-showResults();
-}
+if(currentQuestion<questions.length){showQuestion();}else{showResults();}
 }
 
 function previousQuestion(){
-if(currentQuestion>0){
-currentQuestion--;
-showQuestion();
-}
+if(currentQuestion>0){currentQuestion--;showQuestion();}
 }
 
 function updateNavigation(){
 document.getElementById("prevBtn").style.display=
 currentQuestion>0?"inline-block":"none";
-
 document.getElementById("nextBtn").textContent=
 currentQuestion<questions.length-1?"다음":"결과 보기";
 }
@@ -117,20 +108,20 @@ document.getElementById("currentQ").textContent=currentQuestion+1;
 }
 
 function showResults(){
-document.getElementById("quiz-container").style.display="none";
-document.getElementById("result-container").style.display="block";
+document.getElementById('quiz-container').style.display='none';
+document.getElementById('result-container').style.display='block';
 
-let highest=0;
-let type="";
+let highestScore=0;
+let leadershipType='';
 
-for(let key in scores){
-if(scores[key]>highest){
-highest=scores[key];
-type=key;
+for(let type in scores){
+if(scores[type]>highestScore){
+highestScore=scores[type];
+leadershipType=type;
 }
 }
 
-const map={
+const typeMap={
 vision:"비전형 리더십",
 execution:"실행형 리더십",
 innovation:"혁신형 리더십",
@@ -138,15 +129,45 @@ coordination:"조율형 리더십",
 growth:"성장형 리더십"
 };
 
-document.getElementById("result").textContent=
-`당신의 리더십 유형은: ${map[type]}`;
+const descriptionMap={
+vision:"전략적 사고와 방향 제시에 강합니다.",
+execution:"강한 추진력과 실행력을 갖춘 리더입니다.",
+innovation:"새로운 시도와 변화를 이끄는 창의적 리더입니다.",
+coordination:"팀워크와 관계 조율에 강한 리더입니다.",
+growth:"지속적인 성장과 발전을 추구하는 리더입니다."
+};
+
+document.getElementById('result').innerHTML=
+`<h2>당신의 리더십 유형은: ${typeMap[leadershipType]}</h2>`;
+
+let total=Object.values(scores).reduce((a,b)=>a+b,0);
+let detailHTML=`<div class="result-detail-box"><h3>점수 분석</h3>`;
+
+for(let key in scores){
+let percent=Math.round((scores[key]/total)*100);
+detailHTML+=`
+<div class="percent-item">
+<strong>${typeMap[key]}</strong> (${percent}%)
+<div class="percent-bar">
+<div class="percent-fill" style="width:${percent}%"></div>
+</div>
+</div>`;
+}
+
+detailHTML+=`
+<hr style="margin:20px 0;">
+<h3>상세 설명</h3>
+<p>${descriptionMap[leadershipType]}</p>
+</div>`;
+
+document.getElementById('resultDetail').innerHTML=detailHTML;
 }
 
 function restartQuiz(){
 currentQuestion=0;
 scores={vision:0,execution:0,innovation:0,coordination:0,growth:0};
-document.getElementById("result-container").style.display="none";
-document.getElementById("quiz-container").style.display="block";
+document.getElementById('result-container').style.display='none';
+document.getElementById('quiz-container').style.display='block';
 showQuestion();
 }
 
