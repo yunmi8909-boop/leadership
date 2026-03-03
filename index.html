@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>리더십 유형 테스트</title>
+    <title>나의 리더십 유형 Test</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>리더십 유형 테스트</h1>
-        <form id="leadership-test">
-            <div class="question">
-                <p>1. 팀원들과의 소통을 중요시 여긴다.</p>
-                <label><input type="radio" name="q1" value="A"> 매우 그렇다</label>
-                <label><input type="radio" name="q1" value="B"> 그렇다</label>
-                <label><input type="radio" name="q1" value="C"> 보통이다</label>
-                <label><input type="radio" name="q1" value="D"> 그렇지 않다</label>
+        <h1>나의 리더십 유형 Test</h1>
+        <div id="quiz-container">
+            <div class="question-container">
+                <div class="question-title" id="questionCategory"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
             </div>
-            <div class="question">
-                <p>2. 결정을 내릴 때 팀원들의 의견을 반영한다.</p>
-                <label><input type="radio" name="q2" value="A"> 매우 그렇다</label>
-                <label><input type="radio" name="q2" value="B"> 그렇다</label>
-                <label><input type="radio" name="q2" value="C"> 보통이다</label>
-                <label><input type="radio" name="q2" value="D"> 그렇지 않다</label>
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" style="display: none;">이전</button>
+                <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>다음</button>
             </div>
-            <!-- 추가 질문을 여기에 추가 -->
-            <button type="submit">테스트 결과 보기</button>
-        </form>
-        <div id="result" class="hidden">
-            <h2>테스트 결과</h2>
-            <p id="result-text"></p>
+        </div>
+        <div id="result-container" style="display: none;">
+            <div id="result"></div>
+            <button class="btn" onclick="restartQuiz()">다시 진단하기</button>
         </div>
     </div>
     <script src="script.js"></script>
