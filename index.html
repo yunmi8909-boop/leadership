@@ -32,8 +32,43 @@
         </div>
 
         <div id="result-container" style="display:none;">
-            <div id="result"></div>
-            <div id="resultDetail"></div>
+
+            <div class="result-detail-box">
+                <img id="resultImage" src="" alt="Result Image" style="width:100%; margin-top:20px;">
+            </div>
+
+            <div class="result-detail-box">
+                <div id="result"></div>
+                <div id="resultDetail"></div>
+            </div>
+
+<div class="result-detail-box">
+    <h3>나의 유형에 대해 좀 더 알아보기</h3>
+    
+    <!-- 각 항목에 class="check-item" 추가 -->
+    <div class="check-item">
+        <input type="checkbox" id="checkbox1">
+        <label for="checkbox1">리더십 유형에 따른 강점과 약점 분석</label>
+    </div>
+    <div class="check-item">
+        <input type="checkbox" id="checkbox2">
+        <label for="checkbox2">리더십 유형에 따른 스트레스 관리 방법</label>
+    </div>
+    <div class="check-item">
+        <input type="checkbox" id="checkbox3">
+        <label for="checkbox3">리더십 유형에 따른 멘토 위인 찾기</label>
+    </div>
+    <div class="check-item">
+        <input type="checkbox" id="checkbox4">
+        <label for="checkbox4">힘이 되는 명언 / 노래 / 드라마 / 영화 추천</label>
+    </div>
+    <div class="check-item">
+        <input type="checkbox" id="checkbox5">
+        <label for="checkbox5">리더십 유형에 따른 팀원과 소통 실수 예방하기</label>
+    </div>
+
+    <button class="btn" onclick="goToChatGPT()">웹 ChatGPT 바로가기</button>
+</div>
 
             <div class="restart-center">
                 <button class="btn" onclick="restartQuiz()">다시 진단하기</button>

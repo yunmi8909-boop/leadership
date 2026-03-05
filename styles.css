@@ -1,12 +1,23 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
+    
+    /* [수정 1] padding: 0; 대신 위아래 여백을 줍니다. */
+    padding: 50px 0; 
+    
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    
+    /* [수정 2] center (중앙 정렬) -> flex-start (위쪽 정렬)로 변경 */
+    align-items: flex-start; 
+    
+    /* [수정 3] height (고정 높이) -> min-height (최소 높이)로 변경 */
+    min-height: 100vh; 
+    
     background-color: #f0f0f0;
+    
+    /* [추가] 패딩 때문에 스크롤 생기는 것 방지 */
+    box-sizing: border-box; 
 }
 
 .container {
@@ -112,6 +123,13 @@ button {
     width: 48%;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center; /* 가로 축 중앙 정렬 */
+    align-items: center;     /* 세로 축 중앙 정렬 */
+    width: 100%;             /* 너비 확보 */
+}
+
 button:hover {
     background: #0056b3;
 }
@@ -121,23 +139,26 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.btn {
-    background: #000;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin: 0.5rem;
-}
+    .btn {
+        display: block; /* 블록 요소로 변경하여 margin auto 적용 가능하게 함 */
+        width: fit-content; /* 콘텐츠 크기에 맞게 너비 설정 */
+        margin: 30px auto 0 auto; /* 위쪽 여백 30px, 좌우 auto로 중앙 정렬 */
+        background: #000;
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem; /* 좌우 패딩을 늘려 더 안정감 있게 */
+        border-radius: 50px; /* 둥근 캡슐 형태로 변경 (트렌디한 느낌) */
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 버튼 그림자 */
+    }
 
-.btn:hover {
-    background: #333;
-}
-
+    .btn:hover {
+        transform: translateY(-2px); /* 호버 시 살짝 떠오르는 효과 */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
 .btn-secondary {
     background: white;
     color: #333;
@@ -151,13 +172,50 @@ button:disabled {
 }
 
 .result-detail-box {
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f9f9f9;
-    border: 1px solid #e5e5e5;
-    text-align: left;
+        margin-top: 20px;
+        padding: 30px; /* 여백을 좀 더 넉넉하게 수정 */
+        border-radius: 16px; /* 모서리를 더 둥글게 */
+        background: #ffffff; /* 배경을 완전 흰색으로 변경하여 깔끔하게 */
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 추가 */
+        text-align: left;
 }
+
+    .result-detail-box h3 {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: 700;
+        text-align: center; /* 제목은 중앙 정렬 */
+    }
+
+    /* 체크박스 리스트 아이템 스타일링 */
+    .check-item {
+        display: flex;
+        align-items: center; /* 체크박스와 텍스트 수직 중앙 정렬 */
+        padding: 12px 10px;
+        border-bottom: 1px solid #f0f0f0; /* 구분선 추가 */
+        transition: background-color 0.2s;
+    }
+
+    .check-item:hover {
+        background-color: #f9f9f9; /* 마우스 올렸을 때 효과 */
+        border-radius: 8px;
+    }
+
+    .check-item label {
+        margin-left: 10px; /* 체크박스와 글자 사이 간격 */
+        cursor: pointer;
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .check-item input[type="checkbox"] {
+        accent-color: #000; /* 체크박스 색상을 버튼과 맞춤 */
+        transform: scale(1.2); /* 체크박스 크기 약간 키움 */
+        cursor: pointer;
+    }
 
 .percent-item {
     margin-top: 15px;
@@ -181,3 +239,4 @@ button:disabled {
     justify-content: center;
     margin-top: 25px;
 }
+

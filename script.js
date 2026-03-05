@@ -141,9 +141,9 @@ document.getElementById('result').innerHTML=
 `<h2>당신의 리더십 유형은: ${typeMap[leadershipType]}</h2>`;
 
 let total=Object.values(scores).reduce((a,b)=>a+b,0);
-let detailHTML=`<div class="result-detail-box"><h3>점수 분석</h3>`;
+//let detailHTML=`<div class="result-detail-box"><h3>점수 분석</h3>`;
 
-for(let key in scores){
+/*for(let key in scores){
 let percent=Math.round((scores[key]/total)*100);
 detailHTML+=`
 <div class="percent-item">
@@ -152,15 +152,25 @@ detailHTML+=`
 <div class="percent-fill" style="width:${percent}%"></div>
 </div>
 </div>`;
-}
+}*/
 
-detailHTML+=`
+let detailHTML=`
 <hr style="margin:20px 0;">
 <h3>상세 설명</h3>
 <p>${descriptionMap[leadershipType]}</p>
 </div>`;
 
 document.getElementById('resultDetail').innerHTML=detailHTML;
+
+const imageMap = {
+    vision: "1.jpg",
+    execution: "2.jpg",
+    innovation: "3.jpg",
+    coordination: "4.jpg",
+    growth: "5.jpg"
+};
+
+document.getElementById('resultImage').src = `images/${imageMap[leadershipType]}`;
 }
 
 function restartQuiz(){
@@ -169,6 +179,21 @@ scores={vision:0,execution:0,innovation:0,coordination:0,growth:0};
 document.getElementById('result-container').style.display='none';
 document.getElementById('quiz-container').style.display='block';
 showQuestion();
+}
+
+function goToChatGPT() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let selectedOptions = [];
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+            selectedOptions.push(checkbox.nextElementSibling.textContent);
+        }
+    });
+
+    const prompt = `내 리더십 유형은 ${document.querySelector('#result h2').textContent}입니다. 선택한 항목: ${selectedOptions.join(', ')}`;
+    navigator.clipboard.writeText(prompt).then(() => {
+        window.open('https://chat.openai.com/', '_blank');
+    });
 }
 
 document.addEventListener("DOMContentLoaded",showQuestion);
