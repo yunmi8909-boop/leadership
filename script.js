@@ -1,54 +1,110 @@
 const questions = [
-{
-category:"새로운 프로젝트가 시작될 때 나는",
-options:[
-{text:"A. 큰 그림과 방향을 먼저 그린다",type:"vision"},
-{text:"B. 구체적인 실행 계획부터 세운다",type:"execution"}
-]},
-{
-category:"팀이 어려움에 부딪히면",
-options:[
-{text:"A. 새로운 접근법을 제안한다",type:"innovation"},
-{text:"B. 팀원들의 감정을 먼저 살핀다",type:"coordination"}
-]},
-{
-category:"업무 중 가장 보람을 느낄 때는",
-options:[
-{text:"A. 내가 성장하고 있음을 느낄 때",type:"growth"},
-{text:"B. 팀이 목표를 달성했을 때",type:"execution"}
-]},
-{
-category:"회의 중 의견이 갈릴 때 나는",
-options:[
-{text:"A. 모두의 의견을 조율해 합의점을 찾는다",type:"coordination"},
-{text:"B. 새로운 아이디어로 방향을 전환한다",type:"innovation"}
-]},
-{
-category:"새로운 기술이나 트렌드를 접하면",
-options:[
-{text:"A. 바로 시도해본다",type:"innovation"},
-{text:"B. 내 성장에 어떻게 도움이 될지 고민한다",type:"growth"}
-]},
-{
-category:"리더로서 가장 중요한 것은",
-options:[
-{text:"A. 명확한 비전 제시",type:"vision"},
-{text:"B. 실행력과 추진력",type:"execution"}
-]},
-{
-category:"팀원에게 피드백을 줄 때",
-options:[
-{text:"A. 구체적인 개선 방향을 제시한다",type:"growth"},
-{text:"B. 감정과 상황을 고려해 조심스럽게 전달한다",type:"coordination"}
-]},
-{
-category:"새로운 시도를 할 때 나는",
-options:[
-{text:"A. 실패를 두려워하지 않는다",type:"innovation"},
-{text:"B. 팀이 함께할 수 있도록 설득한다",type:"vision"}
-]}
+    {
+        category: "새로운 프로젝트가 시작될 때 나는",
+        options: [
+            { text: "A. 큰 그림과 방향을 먼저 그린다", type: "vision" },
+            { text: "B. 구체적인 실행 계획부터 세운다", type: "execution" }
+        ]
+    },
+    {
+        category: "팀이 어려움에 부딪히면",
+        options: [
+            { text: "A. 새로운 접근법을 제안한다", type: "innovation" },
+            { text: "B. 팀원들의 감정을 먼저 살핀다", type: "coordination" }
+        ]
+    },
+    {
+        category: "업무 중 가장 보람을 느낄 때는",
+        options: [
+            { text: "A. 내가 성장하고 있음을 느낄 때", type: "growth" },
+            { text: "B. 팀이 목표를 달성했을 때", type: "execution" }
+        ]
+    },
+    {
+        category: "회의 중 의견이 갈릴 때 나는",
+        options: [
+            { text: "A. 모두의 의견을 조율해 합의점을 찾는다", type: "coordination" },
+            { text: "B. 새로운 아이디어로 방향을 전환한다", type: "innovation" }
+        ]
+    },
+    {
+        category: "새로운 기술이나 트렌드를 접하면",
+        options: [
+            { text: "A. 바로 시도해본다", type: "innovation" },
+            { text: "B. 내 성장에 어떻게 도움이 될지 고민한다", type: "growth" }
+        ]
+    },
+    {
+        category: "리더로서 가장 중요한 것은",
+        options: [
+            { text: "A. 명확한 비전 제시", type: "vision" },
+            { text: "B. 실행력과 추진력", type: "execution" }
+        ]
+    },
+    {
+        category: "팀원에게 피드백을 줄 때",
+        options: [
+            { text: "A. 구체적인 개선 방향을 제시한다", type: "growth" },
+            { text: "B. 감정과 상황을 고려해 조심스럽게 전달한다", type: "coordination" }
+        ]
+    },
+    {
+        category: "새로운 시도를 할 때 나는",
+        options: [
+            { text: "A. 실패를 두려워하지 않는다", type: "innovation" },
+            { text: "B. 팀이 함께할 수 있도록 설득한다", type: "vision" }
+        ]
+    },
+    {
+        category: "상사와 방향성이 맞지 않는다고 느낄 때 나는",
+        options: [
+            { text: "A. 조직의 큰 방향과 연결 지어 설득해본다", type: "vision" },
+            { text: "B. 갈등이 커지지 않도록 대화를 통해 입장 차이를 좁힌다", type: "coordination" }
+        ]
+    },
+    {
+        category: "팀원이 반복적으로 실수를 할 때 나는",
+        options: [
+            { text: "A. 왜 그런지 원인을 분석하고 새로운 방식으로 바꿔본다", type: "innovation" },
+            { text: "B. 그 사람이 성장할 수 있도록 코칭 계획을 세운다", type: "growth" }
+        ]
+    },
+    {
+        category: "업무가 과도하게 몰려 우선순위가 혼란스러울 때 나는",
+        options: [
+            { text: "A. 우리가 왜 이 일을 하는지 목적부터 점검한다", type: "vision" },
+            { text: "B. 업무 프로세스를 재설계해 구조적으로 정리한다", type: "innovation" }
+        ]
+    },
+    {
+        category: "성과가 기대에 못 미쳤을 때 나는",
+        options: [
+            { text: "A. 무엇을 배우고 성장할 수 있는지 돌아본다", type: "growth" },
+            { text: "B. 원인을 분석하고 실행 방식을 점검한다", type: "execution" }
+        ]
+    },
+    {
+        category: "팀 분위기가 침체되어 있을 때 나는",
+        options: [
+            { text: "A. 구성원 개개인의 동기 요인을 파악한다", type: "coordination" },
+            { text: "B. 팀의 역량 개발 기회를 설계한다", type: "growth" }
+        ]
+    },
+    {
+        category: "업무를 팀원에게 지시하고 완료할 때까지",
+        options: [
+            { text: "A. 자율성을 주고 기다린다", type: "vision" },
+            { text: "B. 매일 매일 물어본다", type: "execution" }
+        ]
+    },
+    {
+        category: "Ideation 회의를 할 때",
+        options: [
+            { text: "A. 내가 idea를 많이 낸다", type: "innovation" },
+            { text: "B. 팀원들이 idea를 많이 말할 수 있도록 한다", type: "coordination" }
+        ]
+    }
 ];
-
 let currentQuestion = 0;
 let scores = {vision:0,execution:0,innovation:0,coordination:0,growth:0};
 
@@ -66,6 +122,16 @@ div.innerHTML=`
 <input type="radio" name="q${currentQuestion}" value="${opt.type}" id="opt${i}">
 <label for="opt${i}">${opt.text}</label>
 `;
+
+ div.addEventListener("click", () => {
+        // 1. 라디오 버튼 체크
+        const radioButton = div.querySelector("input[type='radio']");
+        radioButton.checked = true;
+
+        // 2. Next 버튼 활성화
+        document.getElementById("nextBtn").disabled = false;
+    });
+
 container.appendChild(div);
 });
 
