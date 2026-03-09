@@ -105,161 +105,170 @@ const questions = [
         ]
     }
 ];
+
 let currentQuestion = 0;
 let scores = {vision:0,execution:0,innovation:0,coordination:0,growth:0};
 
-function showQuestion(){
-const q=questions[currentQuestion];
-document.getElementById("questionCategory").textContent=q.category;
-document.getElementById("questionText").textContent="";
-const container=document.getElementById("optionsContainer");
-container.innerHTML="";
+function showQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById("questionCategory").textContent = q.category;
+    document.getElementById("questionText").textContent = "";
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = "";
 
-q.options.forEach((opt,i)=>{
-const div=document.createElement("div");
-div.className="option";
-div.innerHTML=`
-<input type="radio" name="q${currentQuestion}" value="${opt.type}" id="opt${i}">
-<label for="opt${i}">${opt.text}</label>
-`;
+    q.options.forEach((opt,i)=>{
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerHTML = `
+            <input type="radio" name="q${currentQuestion}" value="${opt.type}" id="opt${i}">
+            <label for="opt${i}">${opt.text}</label>
+        `;
 
- div.addEventListener("click", () => {
-        // 1. 라디오 버튼 체크
-        const radioButton = div.querySelector("input[type='radio']");
-        radioButton.checked = true;
+        div.addEventListener("click", () => {
+            const radioButton = div.querySelector("input[type='radio']");
+            radioButton.checked = true;
+            document.getElementById("nextBtn").disabled = false;
+        });
 
-        // 2. Next 버튼 활성화
-        document.getElementById("nextBtn").disabled = false;
+        container.appendChild(div);
     });
 
-container.appendChild(div);
-});
+    document.getElementById("nextBtn").disabled = true;
 
-document.getElementById("nextBtn").disabled=true;
+    document.querySelectorAll(`input[name="q${currentQuestion}"]`)
+        .forEach(input => {
+            input.addEventListener("change", () => {
+                document.getElementById("nextBtn").disabled = false;
+            });
+        });
 
-document.querySelectorAll(`input[name="q${currentQuestion}"]`)
-.forEach(input=>{
-input.addEventListener("change",()=>{
-document.getElementById("nextBtn").disabled=false;
-});
-});
-
-updateProgressBar();
-updateNavigation();
+    updateProgressBar();
+    updateNavigation();
 }
 
-function nextQuestion(){
-const selected=document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-if(!selected)return;
-scores[selected.value]++;
-currentQuestion++;
-if(currentQuestion<questions.length){showQuestion();}else{showResults();}
+function nextQuestion() {
+    const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+    if(!selected) return;
+
+    scores[selected.value]++;
+    currentQuestion++;
+    if(currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        showResults();
+    }
 }
 
-function previousQuestion(){
-if(currentQuestion>0){currentQuestion--;showQuestion();}
+function previousQuestion() {
+    if(currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+    }
 }
 
-function updateNavigation(){
-document.getElementById("prevBtn").style.display=
-currentQuestion>0?"inline-block":"none";
-document.getElementById("nextBtn").textContent=
-currentQuestion<questions.length-1?"다음":"결과 보기";
+function updateNavigation() {
+    document.getElementById("prevBtn").style.display =
+        currentQuestion > 0 ? "inline-block" : "none";
+    document.getElementById("nextBtn").textContent =
+        currentQuestion < questions.length-1 ? "다음" : "결과 보기";
 }
 
-function updateProgressBar(){
-const percent=((currentQuestion+1)/questions.length)*100;
-document.getElementById("progressBar").style.width=percent+"%";
-document.getElementById("currentQ").textContent=currentQuestion+1;
+function updateProgressBar() {
+    const percent = ((currentQuestion+1)/questions.length)*100;
+    document.getElementById("progressBar").style.width = percent+"%";
+    document.getElementById("currentQ").textContent = currentQuestion+1;
 }
 
-function showResults(){
-document.getElementById('quiz-container').style.display='none';
-document.getElementById('result-container').style.display='block';
+function showResults() {
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('result-container').style.display = 'block';
+    document.getElementById('title').style.display = 'none';
 
-let highestScore=0;
-let leadershipType='';
+    let highestScore = 0;
+    let leadershipType = '';
+    for(let type in scores){
+        if(scores[type] > highestScore){
+            highestScore = scores[type];
+            leadershipType = type;
+        }
+    }
 
-for(let type in scores){
-if(scores[type]>highestScore){
-highestScore=scores[type];
-leadershipType=type;
+    const typeMap = {
+        vision: "비전형 리더십",
+        execution: "실행형 리더십",
+        innovation: "혁신형 리더십",
+        coordination: "조율형 리더십",
+        growth: "성장형 리더십"
+    };
+
+    const descriptionMap = {
+        vision: "조직의 미래를 제시하고 영감을 주는 리더",
+        execution: "명확한 목표를 설정하고 실행을 중시하는 리더",
+        innovation: "새로운 아이디어와 변화를 주도하는 리더",
+        coordination: "구성원 간의 협력을 촉진하고 조율하는 리더",
+        growth: "구성원의 성장을 돕고 지원하는 리더"
+    };
+
+    const descriptionMapSub = {
+        vision: `불확실한 상황에서도 조직이 나아갈 방향을 제시하고, 구성원이 따라올 수 있도록 영감을 주는 리더십입니다.<br>
+이 유형의 컬러는 <span style="color:#1E3ABA">딥 블루</span>입니다. <span style="color:#1E3ABA">우드향</span>처럼 안정적이고 신뢰를 줍니다.`,
+        execution: `말보다는 행동으로 신뢰를 쌓고, 정해진 목표를 끝까지 실행하여 성과로 조직을 움직이게 하는 리더십입니다.<br>
+이 유형의 컬러는 <span style="color:#991B1B">버건디 레드</span>입니다. <span style="color:#991B1B">블랙체리향</span>처럼 강렬하고 확신을 줍니다.</span>`,
+        innovation: `익숙한 방식을 넘어 새로운 시도와 조합을 통해 변화를 만들어 내고, 도전을 조직의 문화로 확산시키는 리더십입니다.<br>
+이 유형의 컬러는 <span style="color:#FACC15">브라이트 옐로우</span>입니다. <span style="color:#FACC15">시트로벨라향</span>처럼 신선하고 활력을 줍니다.</span>`,
+        coordination: `구성원의 목소리에 귀 기울여 관계의 균형을 맞추고, 협력 속에서 조직이 자연스럽게 움직이도록 만드는 리더십입니다.<br>
+이 유형의 컬러는 <span style="color:#86EFAC">소프트 그린</span>입니다. <span style="color:#86EFAC">가든파티향</span>처럼 조화롭고 생동감을 줍니다.</span>`,
+        growth: `구성원의 가능성을 믿고 학습과 피드백을 통해 함께 성장하며, 지속적으로 성장할 수 있도록 지원하는 리더십입니다.<br>
+이 유형의 컬러는 <span style="color:#A788BF">라벤더 퍼플</span>입니다. <span style="color:#A788BF">겐조플라워향</span>처럼 부드럽고 지속적인 성장을 촉진합니다.</span>`
+    };
+
+    document.getElementById('result').innerHTML =
+        '<h2 style="text-align: center;">당신의 리더십 유형은?</h2>' +
+        '<h2 style="text-align: center;">' + typeMap[leadershipType] + '</h2>';
+
+    let detailHTML = `
+        <hr style="margin:20px 0;">
+        <h3>${descriptionMap[leadershipType]}</h3>
+        <p>${descriptionMapSub[leadershipType]}</p>
+    `;
+
+    document.getElementById('resultDetail').innerHTML = detailHTML;
+
+    const imageMap = {
+        vision: "1.jpg",
+        execution: "2.jpg",
+        innovation: "3.jpg",
+        coordination: "4.jpg",
+        growth: "5.jpg"
+    };
+
+    document.getElementById('resultImage').src = `images/${imageMap[leadershipType]}`;
 }
-}
 
-const typeMap={
-vision:"비전형 리더십",
-execution:"실행형 리더십",
-innovation:"혁신형 리더십",
-coordination:"조율형 리더십",
-growth:"성장형 리더십"
-};
-
-const descriptionMap={
-vision:"전략적 사고와 방향 제시에 강합니다.",
-execution:"강한 추진력과 실행력을 갖춘 리더입니다.",
-innovation:"새로운 시도와 변화를 이끄는 창의적 리더입니다.",
-coordination:"팀워크와 관계 조율에 강한 리더입니다.",
-growth:"지속적인 성장과 발전을 추구하는 리더입니다."
-};
-
-document.getElementById('result').innerHTML=
-`<h2>당신의 리더십 유형은: ${typeMap[leadershipType]}</h2>`;
-
-let total=Object.values(scores).reduce((a,b)=>a+b,0);
-//let detailHTML=`<div class="result-detail-box"><h3>점수 분석</h3>`;
-
-/*for(let key in scores){
-let percent=Math.round((scores[key]/total)*100);
-detailHTML+=`
-<div class="percent-item">
-<strong>${typeMap[key]}</strong> (${percent}%)
-<div class="percent-bar">
-<div class="percent-fill" style="width:${percent}%"></div>
-</div>
-</div>`;
-}*/
-
-let detailHTML=`
-<hr style="margin:20px 0;">
-<h3>상세 설명</h3>
-<p>${descriptionMap[leadershipType]}</p>
-</div>`;
-
-document.getElementById('resultDetail').innerHTML=detailHTML;
-
-const imageMap = {
-    vision: "1.jpg",
-    execution: "2.jpg",
-    innovation: "3.jpg",
-    coordination: "4.jpg",
-    growth: "5.jpg"
-};
-
-document.getElementById('resultImage').src = `images/${imageMap[leadershipType]}`;
-}
-
-function restartQuiz(){
-currentQuestion=0;
-scores={vision:0,execution:0,innovation:0,coordination:0,growth:0};
-document.getElementById('result-container').style.display='none';
-document.getElementById('quiz-container').style.display='block';
-showQuestion();
+function restartQuiz() {
+    currentQuestion = 0;
+    scores = {vision:0,execution:0,innovation:0,coordination:0,growth:0};
+    document.getElementById('result-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('title').style.display = 'block';
+    showQuestion();
 }
 
 function goToChatGPT() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     let selectedOptions = [];
-    checkboxes.forEach((checkbox, index) => {
-        if (checkbox.checked) {
-            selectedOptions.push(checkbox.nextElementSibling.textContent);
-        }
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) selectedOptions.push(checkbox.nextElementSibling.textContent);
     });
 
-    const prompt = `내 리더십 유형은 ${document.querySelector('#result h2').textContent}입니다. 선택한 항목: ${selectedOptions.join(', ')}`;
+    const prompt = `${document.querySelectorAll('#result h2')[0].textContent} ${document.querySelectorAll('#result h2')[1].textContent}. 나의 유형 좀 더 알아보기 : ${selectedOptions.join(', ')}`;
+
     navigator.clipboard.writeText(prompt).then(() => {
         window.open('https://chat.openai.com/', '_blank');
     });
 }
 
-document.addEventListener("DOMContentLoaded",showQuestion);
+// 페이지 로드 시 안내문 기본 표시
+document.addEventListener("DOMContentLoaded", () => {
+    showQuestion();
+});

@@ -1,81 +1,117 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 리더십 유형 Test</title>
-    <link rel="stylesheet" href="styles.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>나의 리더십 유형 Test</title>
+
+<link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
-    <div class="container">
-        <h1>나의 리더십 유형 Test</h1>
 
-        <div id="quiz-container" class="quiz-screen">
-            <div class="progress-text">
-                <span id="currentQ">1</span> / 15
-            </div>
+<div class="container">
 
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
+<h1 id="title">나의 리더십 유형 Test</h1>
 
-            <div class="question-container">
-                <div class="question-title" id="questionCategory"></div>
-                <div class="question-text" id="questionText"></div>
-                <div class="options" id="optionsContainer"></div>
-            </div>
+<div id="quiz-container" class="quiz-screen">
 
-            <div class="navigation">
-                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" style="display:none;">이전</button>
-                <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>다음</button>
-            </div>
-        </div>
-
-        <div id="result-container" style="display:none;">
-
-            <div class="result-detail-box">
-                <img id="resultImage" src="" alt="Result Image" style="width:100%; margin-top:20px;">
-            </div>
-
-            <div class="result-detail-box">
-                <div id="result"></div>
-                <div id="resultDetail"></div>
-            </div>
-
-<div class="result-detail-box">
-    <h3>나의 유형에 대해 좀 더 알아보기</h3>
-    
-    <!-- 각 항목에 class="check-item" 추가 -->
-    <div class="check-item">
-        <input type="checkbox" id="checkbox1">
-        <label for="checkbox1">리더십 유형에 따른 강점과 약점 분석</label>
-    </div>
-    <div class="check-item">
-        <input type="checkbox" id="checkbox2">
-        <label for="checkbox2">리더십 유형에 따른 스트레스 관리 방법</label>
-    </div>
-    <div class="check-item">
-        <input type="checkbox" id="checkbox3">
-        <label for="checkbox3">리더십 유형에 따른 멘토 위인 찾기</label>
-    </div>
-    <div class="check-item">
-        <input type="checkbox" id="checkbox4">
-        <label for="checkbox4">힘이 되는 명언 / 노래 / 드라마 / 영화 추천</label>
-    </div>
-    <div class="check-item">
-        <input type="checkbox" id="checkbox5">
-        <label for="checkbox5">리더십 유형에 따른 팀원과 소통 실수 예방하기</label>
-    </div>
-
-    <button class="btn" onclick="goToChatGPT()">웹 ChatGPT 바로가기</button>
+<div class="progress-text">
+<span id="currentQ">1</span> / 15
 </div>
 
-            <div class="restart-center">
-                <button class="btn" onclick="restartQuiz()">다시 진단하기</button>
-            </div>
-        </div>
-    </div>
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
 
-    <script src="script.js"></script>
+<div class="question-container">
+
+<div class="question-title" id="questionCategory"></div>
+
+<div class="question-text" id="questionText"></div>
+
+<div class="options" id="optionsContainer"></div>
+
+</div>
+
+<div class="navigation">
+
+<button class="btn btn-secondary" id="prevBtn"
+onclick="previousQuestion()" style="display:none;">
+이전
+</button>
+
+<button class="btn" id="nextBtn"
+onclick="nextQuestion()" disabled>
+다음
+</button>
+
+</div>
+
+</div>
+
+<div id="result-container" style="display:none;">
+
+<img id="resultImage"
+src=""
+style="width:100%; margin-top:20px;">
+
+<div class="result-detail-box">
+<div id="result"></div>
+<div id="resultDetail"></div>
+</div>
+
+<div class="result-detail-box">
+
+<h3>나의 유형에 대해 좀 더 알아보기</h3>
+
+<div class="check-item">
+<input type="checkbox" id="checkbox1">
+<label for="checkbox1">리더십 유형에 따른 강점과 약점 분석</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" id="checkbox2">
+<label for="checkbox2">리더십 유형에 따른 스트레스 관리 방법</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" id="checkbox3">
+<label for="checkbox3">리더십 유형에 따른 멘토 위인 찾기</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" id="checkbox4">
+<label for="checkbox4">힘이 되는 명언 / 노래 / 드라마 / 영화 추천</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" id="checkbox5">
+<label for="checkbox5">리더십 유형에 따른 팀원과 소통 실수 예방하기</label>
+</div>
+
+<p style="font-size:12px;color:#666;text-align:center;margin-bottom:10px;">
+버튼을 누르면 프롬프트가 자동으로 복사됩니다. ChatGPT에서 붙여넣기 해주세요.
+</p>
+
+<button class="btn" id="chatgptBtn" onclick="goToChatGPT()">
+웹 ChatGPT 바로가기
+</button>
+
+</div>
+
+<div class="restart-center">
+<button class="btn" onclick="restartQuiz()">다시 진단하기</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
