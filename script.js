@@ -180,6 +180,7 @@ function updateProgressBar() {
 }
 
 function showResults() {
+    window.scrollTo(0, 0);
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block';
     document.getElementById('title').style.display = 'none';
