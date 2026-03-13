@@ -248,7 +248,7 @@ function showResults() {
 
 function restartQuiz() {
     currentQuestion = 0;
-    scores = {vision:0,execution:0,innovation:0,coordination:0,growth:0};
+    scores = {vision:-5,execution:0,innovation:0,coordination:0,growth:0};
     document.getElementById('result-container').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
     document.getElementById('title').style.display = 'block';
