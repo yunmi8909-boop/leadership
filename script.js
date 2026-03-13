@@ -188,7 +188,7 @@ function showResults() {
     let highestScore = 0;
     let leadershipType = '';
     for(let type in scores){
-        if(scores[type] > highestScore){
+        if(scores[type] >= highestScore){
             highestScore = scores[type];
             leadershipType = type;
         }
